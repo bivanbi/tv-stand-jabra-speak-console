@@ -48,15 +48,12 @@ module jabra510_hollow_footplate() {
         circle(r = footplate_radius);
         jabra510_footplate_cutout();
     }
-    // cylinder(h = jabra510_footplate_holder_thickness(), r = footplate_radius);
 }
 
-module jabra510_footplate_holder(groove_angle = 180) {
-    groove_rotate = (180 - groove_angle) / 2;
-    
+module jabra510_footplate_holder() {
     union() {
         jabra510_hollow_footplate();
-        rotate([0, 0, groove_rotate]) rotate_extrude(angle = groove_angle) jabra510_footplate_holder_cross_section();
+        rotate_extrude(angle = 180) jabra510_footplate_holder_cross_section();
     }
 }
 
