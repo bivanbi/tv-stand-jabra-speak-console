@@ -12,7 +12,6 @@ function jabra510_footplate_holder_groove_depth() = 4;
 function jabra510_footplate_holder_tolerance_x() = 0.5; // provide somewhat loose fit
 function jabra510_footplate_holder_tolerance_y() = 0.2; // provide somewhat loose fit
 
-
 footplate_radius = jabra510_footplate_diameter() / 2 + jabra510_footplate_holder_tolerance_x();
 hollow_footplate_outer_skirt_width = 10;
 hollow_footplate_spoke_width = 10;
