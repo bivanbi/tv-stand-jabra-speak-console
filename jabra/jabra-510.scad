@@ -1,7 +1,7 @@
 // Jabra Speak 510
 
 function jabra510_footplate_diameter() = 96; // mm
-function jabra510_footplate_edge_thickness() = 5;
+function jabra510_footplate_edge_thickness() = 5; // hard to measure precisely because of soft material
 function jabra510_groove_diameter() = 71;
 function jabra510_groove_height() = 5;
 
