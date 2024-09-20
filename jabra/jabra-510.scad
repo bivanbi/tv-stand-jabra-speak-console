@@ -1,7 +1,7 @@
 // Jabra Speak 510
 
 function jabra510_footplate_diameter() = 96; // mm
-function jabra510_footplate_edge_thickness() = 2;
+function jabra510_footplate_edge_thickness() = 5;
 function jabra510_groove_diameter() = 71;
 function jabra510_groove_height() = 5;
 
@@ -17,17 +17,13 @@ hollow_footplate_outer_skirt_width = 10;
 hollow_footplate_spoke_width = 10;
 
 module jabra510_footplate_holder_cross_section() {    
-    vertical_section_height = jabra510_footplate_holder_thickness() *  2 + jabra510_footplate_holder_tolerance_y();
-    
     clamp_section_width = jabra510_footplate_holder_groove_depth() + jabra510_footplate_holder_thickness();
     clamp_section_x = footplate_radius - jabra510_footplate_holder_groove_depth();
     clamp_section_y = jabra510_footplate_holder_thickness() + jabra510_footplate_edge_thickness() + jabra510_footplate_holder_tolerance_y();
     
-    echo("Vertical section height: ", vertical_section_height);
-    
     union() {
         // square([footplate_radius, jabra510_footplate_holder_thickness()]);
-        translate([footplate_radius, 0, 0]) square([jabra510_footplate_holder_thickness(), vertical_section_height]);
+        translate([footplate_radius, 0, 0]) square([jabra510_footplate_holder_thickness(), clamp_section_y]);
         translate([clamp_section_x, clamp_section_y, 0]) square([clamp_section_width, jabra510_footplate_holder_thickness()]);
     }
 }
