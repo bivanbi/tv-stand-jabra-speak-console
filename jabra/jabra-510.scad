@@ -5,6 +5,7 @@ function jabra510_footplate_edge_thickness() = 5; // hard to measure precisely b
 function jabra510_groove_diameter() = 71;
 function jabra510_groove_height() = 5;
 
+function jabra510_holder_baseplate_thickness() = 3;
 function jabra510_footplate_holder_thickness() = 2;
 function jabra510_footplate_holder_groove_depth() = 4;
 
@@ -19,7 +20,7 @@ hollow_footplate_spoke_width = 10;
 module jabra510_footplate_holder_cross_section() {    
     clamp_section_width = jabra510_footplate_holder_groove_depth() + jabra510_footplate_holder_thickness();
     clamp_section_x = footplate_radius - jabra510_footplate_holder_groove_depth();
-    clamp_section_y = jabra510_footplate_holder_thickness() + jabra510_footplate_edge_thickness() + jabra510_footplate_holder_tolerance_y();
+    clamp_section_y = jabra510_holder_baseplate_thickness() + jabra510_footplate_edge_thickness() + jabra510_footplate_holder_tolerance_y();
     
     union() {
         translate([footplate_radius, 0, 0]) square([jabra510_footplate_holder_thickness(), clamp_section_y]);
@@ -38,7 +39,7 @@ module jabra510_footplate_cutout() {
 }
 
 module jabra510_hollow_footplate() {
-    linear_extrude(jabra510_footplate_holder_thickness())
+    linear_extrude(jabra510_holder_baseplate_thickness())
     difference() {
         circle(r = footplate_radius);
         jabra510_footplate_cutout();
