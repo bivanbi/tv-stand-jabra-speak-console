@@ -22,7 +22,6 @@ module jabra510_footplate_holder_cross_section() {
     clamp_section_y = jabra510_footplate_holder_thickness() + jabra510_footplate_edge_thickness() + jabra510_footplate_holder_tolerance_y();
     
     union() {
-        // square([footplate_radius, jabra510_footplate_holder_thickness()]);
         translate([footplate_radius, 0, 0]) square([jabra510_footplate_holder_thickness(), clamp_section_y]);
         translate([clamp_section_x, clamp_section_y, 0]) square([clamp_section_width, jabra510_footplate_holder_thickness()]);
     }
