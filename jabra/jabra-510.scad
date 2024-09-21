@@ -9,6 +9,9 @@ function jabra510_holder_baseplate_thickness() = 3;
 function jabra510_footplate_holder_thickness() = 2;
 function jabra510_footplate_holder_groove_depth() = 4;
 
+function jabra510_footplate_holder_slide_in_clearance() = 20; // To be able to slide Jabra into holder, it needs this many millimeters of clearance
+function jabra510_body_ground_clearance() = 11; // the body of the Jabra 510 is is this many millimeters from 'ground'
+
 function jabra510_footplate_holder_tolerance_x() = 0.5; // provide somewhat loose fit
 function jabra510_footplate_holder_tolerance_y() = 0.2; // provide somewhat loose fit
 
