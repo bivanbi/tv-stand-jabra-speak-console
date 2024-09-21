@@ -103,8 +103,8 @@ module extension_arm() {
 
 
 module jabra_extension_arm_hook_2d() {
-    curviture_r = 13;
-    curviture_offset_x = curviture_r + jabra510_holder_baseplate_thickness();
+    curvature_r = 13;
+    curvature_offset_x = curvature_r + jabra510_holder_baseplate_thickness();
     
     difference() {
         hull() {
@@ -112,7 +112,7 @@ module jabra_extension_arm_hook_2d() {
             translate([jabra_arm_hook_center_x(), jabra_arm_hook_center_y(), 0]) circle(d = extension_arm_h());
         }
         translate([jabra_arm_hook_center_x(), jabra_arm_hook_center_y(), 0]) circle(d = jabra_swivel_bore_d());
-        translate([curviture_offset_x, 0]) circle(r = curviture_r);
+        translate([curvature_offset_x, 0]) circle(r = curvature_r);
     }
 }
 
