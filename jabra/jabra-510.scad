@@ -38,9 +38,11 @@ module jabra510_footplate_cutout() {
 }
 
 module jabra510_hollow_footplate() {
+    r = footplate_radius + 0.1; // resolve 'Object may not be a valid 2-manifold and may need repair' issue
+
     linear_extrude(jabra510_holder_baseplate_thickness())
     difference() {
-        circle(r = footplate_radius);
+        circle(r = r);
         jabra510_footplate_cutout();
     }
 }
