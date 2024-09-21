@@ -12,8 +12,8 @@ function perlegear_screw_mount_default_thickness() = 10;
 
 module perlegear_screw_mount_2d_shape(
     w = perlegear_screw_mount_default_width(),
-    o = 0, // overhang
-    u = 0  // underhang
+    o = 0, // top overhang
+    u = 0  // bottom overhang
 ) {
     d = perlegear_upper_tube_bore_diameter();
     o = o + perlegear_upper_tube_bore_distance();
@@ -31,8 +31,8 @@ module perlegear_screw_mount_2d_shape(
 module perlegear_screw_mount_base(
     w = perlegear_screw_mount_default_width(),
     t = perlegear_screw_mount_default_thickness(),
-    o = 0, // overhang
-    u = 0  // underhang
+    o = 0, // top overhang
+    u = 0  // bottom overhang
 ){
     linear_extrude(t) {
         perlegear_screw_mount_2d_shape(w = w, o = o, u = u);
@@ -50,8 +50,8 @@ module perlegear_upper_tube(h){
 module perlegear_screw_mount(
     w = perlegear_screw_mount_default_width(),
     t = perlegear_screw_mount_default_thickness(),
-    o = 0, // overhang
-    u = 0  // underhang
+    o = 0, // top overhang
+    u = 0  // bottom overhang
 ){
     h = w + perlegear_upper_tube_bore_distance() + u + o;
     y_offset = w / 2 + u;
