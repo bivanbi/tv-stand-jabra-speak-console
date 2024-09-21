@@ -83,8 +83,6 @@ module extension_arm() {
     pin_offset_y = extension_arm_h() / 2;
     pin_offset_z = extension_arm_w() / 2;
 
-    swivel_offset_x = extension_arm_length / 2;
-    swivel_offset_y = extension_groove_depth;
     swivel_offset_x = extension_arm_length() / 2;
     swivel_offset_y = extension_groove_depth();
     
@@ -92,7 +90,6 @@ module extension_arm() {
         difference() {
             linear_extrude(extension_arm_h()) extension_arm_2d_shape();
             translate([pin_offset_x, pin_offset_y, pin_offset_z])
-                rotate([90, 0, 0]) cylinder(h = pin_h, d = safety_pin_d);
                 rotate([90, 0, 0]) cylinder(h = pin_h, d = safety_pin_d());
         }
         translate([swivel_offset_x, swivel_offset_y, extension_arm_w() / 2]) extension_arm_jabra_end();
