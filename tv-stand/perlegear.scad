@@ -5,52 +5,65 @@
 function perlegear_upper_tube_diameter() = 38;
 function perlegear_upper_tube_bore_distance() = 40;
 function perlegear_upper_tube_bore_diameter() = 7;
+function perlegear_screw_mount_tube_carve_depth() = 1;
 
-function perlegear_screw_mount_width() = 12;
-function perlegear_screw_mount_thickness() = 8;
-function perlegear_screw_mount_carve_depth() = 1;
-function perlegear_screw_mount_overhang() = 15;
+function perlegear_screw_mount_default_width() = 12;
+function perlegear_screw_mount_default_thickness() = 10;
 
-module perlegear_upper_tube_screw_mount_2d_shape() {
-    w = perlegear_screw_mount_width();  
+module perlegear_screw_mount_2d_shape(
+    w = perlegear_screw_mount_default_width(),
+    o = 0, // overhang
+    u = 0  // underhang
+) {
     d = perlegear_upper_tube_bore_diameter();
-    overhang = perlegear_screw_mount_overhang();
-    distance = perlegear_upper_tube_bore_distance() + overhang;
+    o = o + perlegear_upper_tube_bore_distance();
 
-    translate([0, w / 2, 0]) {
-        difference() {
-            hull() {
-                square(w, center=true);
-                translate([0, distance, 0]) circle(d = w);
-            }
-            translate([0, overhang, 0]) circle(d = d);
-            translate([0, distance, 0]) circle(d = d);
-        }
-    }
-}
-
-module perlegear_upper_tube_screw_mount_base() {
-    linear_extrude(perlegear_screw_mount_thickness()) {
-        perlegear_upper_tube_screw_mount_2d_shape();
-    }
-}
-
-module perlegear_upper_tube() {
-    h = perlegear_upper_tube_bore_distance() + perlegear_screw_mount_overhang() + perlegear_screw_mount_width();
-    
-    rotate([-90, 0, 0])
-    cylinder(h = h, d = perlegear_upper_tube_diameter());
-}
-
-module perlegear_upper_tube_screw_mount() {
-    h = perlegear_upper_tube_bore_distance() + perlegear_screw_mount_overhang() + perlegear_screw_mount_width();
-    
-    tube_z = perlegear_screw_mount_carve_depth() - perlegear_upper_tube_diameter() / 2;
-    
     difference() {
-        perlegear_upper_tube_screw_mount_base();
-        translate([0, 0, tube_z]) perlegear_upper_tube();
+        hull() {
+            translate([0, -u, 0]) circle(d = w);
+            translate([0, o, 0]) circle(d = w);
+        }
+        translate([0, 0, 0]) circle(d = d); // bottom bore
+        translate([0, perlegear_upper_tube_bore_distance(), 0]) circle(d = d); // top bore
     }
 }
 
-perlegear_upper_tube_screw_mount();
+module perlegear_screw_mount_base(
+    w = perlegear_screw_mount_default_width(),
+    t = perlegear_screw_mount_default_thickness(),
+    o = 0, // overhang
+    u = 0  // underhang
+){
+    linear_extrude(t) {
+        perlegear_screw_mount_2d_shape(w = w, o = o, u = u);
+    }
+}
+
+module perlegear_upper_tube(h){
+    z = perlegear_screw_mount_tube_carve_depth() - perlegear_upper_tube_diameter() / 2;
+
+    translate([0, 0, z])
+        rotate([-90, 0, 0])
+            cylinder(h = h, d = perlegear_upper_tube_diameter());
+}
+
+module perlegear_screw_mount(
+    w = perlegear_screw_mount_default_width(),
+    t = perlegear_screw_mount_default_thickness(),
+    o = 0, // overhang
+    u = 0  // underhang
+){
+    h = w + perlegear_upper_tube_bore_distance() + u + o;
+    y_offset = w / 2 + u;
+
+    difference() {
+        translate([0, y_offset, 0])
+        perlegear_screw_mount_base(w = w, t = t, o = o, u = u);
+        perlegear_upper_tube(h = h);
+    }
+}
+
+perlegear_screw_mount();
+translate([30, 0, 0]) perlegear_screw_mount(o = 10);
+translate([60, 0, 0]) perlegear_screw_mount(u = 10);
+translate([90, 0, 0]) perlegear_screw_mount(o = 10, u = 10);
