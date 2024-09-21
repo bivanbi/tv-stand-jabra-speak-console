@@ -93,5 +93,11 @@ module extension_arm() {
     }
 }
 
+module jabra510_console() {
+    rotate([0, 0, 180]) jabra510_footplate_holder();
+}
+
 translate([perlegear_mount_w / 2, extension_arm_h, perlegear_mount_t]) rotate([0, 180, 0]) perlegear_mount_w_extension_groove();
 translate([30, extension_arm_length / 2, 0]) rotate([0, 0, 90]) extension_arm();
+
+translate([100, jabra510_footplate_diameter() / 2 + jabra510_footplate_holder_thickness(), 0]) jabra510_console();
