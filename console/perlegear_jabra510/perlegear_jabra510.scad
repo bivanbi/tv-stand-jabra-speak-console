@@ -85,12 +85,17 @@ module extension_arm() {
 
     swivel_offset_x = extension_arm_length() / 2;
     swivel_offset_y = extension_groove_depth();
+   
+    perlegear_tube_offset_x = perlegear_screw_mount_tube_carve_depth() - (extension_arm_length() + perlegear_upper_tube_diameter()) / 2;
+    perlegear_tube_offset_z = extension_arm_h() / 2;
     
     union() {
         difference() {
             linear_extrude(extension_arm_h()) extension_arm_2d_shape();
             translate([pin_offset_x, pin_offset_y, pin_offset_z])
                 rotate([90, 0, 0]) cylinder(h = pin_h, d = safety_pin_d());
+            translate([perlegear_tube_offset_x, 0, perlegear_tube_offset_z]) cylinder(d = perlegear_upper_tube_diameter(), h = extension_arm_h(), center = true);
+
         }
         translate([swivel_offset_x, swivel_offset_y, extension_arm_w() / 2]) extension_arm_jabra_end();
     }
