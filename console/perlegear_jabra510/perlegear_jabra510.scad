@@ -111,41 +111,28 @@ module jabra_extension_arm_hook_2d() {
     }
 }
 
-module jabra_extension_arm_hook_reinforcement() {
-    linear_extrude(extension_arm_w)
-    difference() {
-        jabra_extension_arm_hook_2d();
-        translate([jabra_arm_hook_center_x, jabra_arm_hook_center_y ,0]) square(extension_arm_h, center = true);
-        
-    }
-}
-
 module jabra_extension_arm_hook() {
     hook_w = extension_arm_w - 2 * extension_groove_depth;
     reinforcement_offset = extension_groove_depth;
 
     translate([hook_w / 2, 0])
     rotate([0, -90, 0])
-        union() {
-            linear_extrude(hook_w) jabra_extension_arm_hook_2d();
-            translate([0, 0, -reinforcement_offset]) jabra_extension_arm_hook_reinforcement();
-        }
+        linear_extrude(hook_w) jabra_extension_arm_hook_2d();
 }
 
 module jabra_console_extension() {
-    offset_x_min = extension_arm_w / 2;
-    offset_x_max = offset_x_min * 3;
-    
+    offset_x_min = extension_arm_w - 2 * extension_groove_depth -3;
+    hook_overlap = jabra_arm_hook_stretch;
+    console_overlap_y = -15; // extension will overlap with console. Must have enough clearance though
+    console_overlap_offset_x = jabra510_footplate_diameter() / 3;
+
     y = jabra510_footplate_holder_slide_in_clearance();
-    console_overlap_y = -10; // extension will overlap with console. Must have enough clearance though
-    console_overlap_offset_x = offset_x_min * 4;
+    hook_overlap_y = jabra510_footplate_holder_slide_in_clearance() + hook_overlap;
 
     points = [
         [-console_overlap_offset_x, console_overlap_y],
-        [-offset_x_max, 0],
-        [-offset_x_min, y],
-        [offset_x_min, y],
-        [offset_x_max, 0],
+        [-offset_x_min, hook_overlap_y],
+        [offset_x_min, hook_overlap_y],
         [console_overlap_offset_x, console_overlap_y]
     ];
     
@@ -160,17 +147,14 @@ module jabra_console_extension() {
 }
 
 module jabra510_console() {
-    rotate([0, 0, 180]) jabra510_footplate_holder();
+    union() {
+        rotate([0, 0, 180]) jabra510_footplate_holder();
+        translate([0, jabra510_footplate_diameter() / 2, 0]) jabra_console_extension();
+    }
 }
-
-
-$fn = 100;
-
 
 translate([perlegear_mount_w / 2, extension_arm_h, perlegear_mount_t]) rotate([0, 180, 0]) perlegear_mount_w_extension_groove();
 translate([30, extension_arm_length / 2, 0]) rotate([0, 0, 90]) extension_arm();
 
 jabra510_holder_y = jabra510_footplate_diameter() / 2 + jabra510_footplate_holder_thickness();
 translate([100, jabra510_holder_y, 0]) jabra510_console();
-
-translate([0, -60, 0]) jabra_console_extension();
