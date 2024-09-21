@@ -21,6 +21,8 @@ function jabra_arm_hook_stretch() = 10;
 function jabra_arm_hook_center_x() = extension_arm_h() / 2;
 function jabra_arm_hook_center_y() = extension_arm_h() / 2 + jabra_arm_hook_stretch();
 
+function jabra_swivel_bore_center_y_offset() = extension_arm_length() + jabra_arm_hook_stretch();
+
 module perlegear_mount() {
     mount_offset_y = - extension_arm_h() / 2 - extension_arm_margin_bottom();
     translate([0, mount_offset_y, 0])
