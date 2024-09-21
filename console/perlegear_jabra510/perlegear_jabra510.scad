@@ -102,10 +102,16 @@ module extension_arm() {
 }
 
 
-module jabra_extension_arm_hook_2d() {
+module jabra_extension_arm_hook() {
     curvature_r = 13;
     curvature_offset_x = curvature_r + jabra510_holder_baseplate_thickness();
-    
+
+    hook_center_offset_x = extension_groove_depth() / 2;
+    hook_w = extension_groove_depth();
+
+    translate([hook_center_offset_x, 0, 0])
+    rotate([0, -90, 0])
+    linear_extrude(hook_w)
     difference() {
         hull() {
             square(jabra510_holder_baseplate_thickness());
@@ -116,23 +122,15 @@ module jabra_extension_arm_hook_2d() {
     }
 }
 
-module jabra_extension_arm_hook() {
-    hook_w = extension_arm_w() - 2 * extension_groove_depth();
-    reinforcement_offset = extension_groove_depth();
-
-    translate([hook_w / 2, 0])
-    rotate([0, -90, 0])
-        linear_extrude(hook_w) jabra_extension_arm_hook_2d();
-}
-
 module jabra_console_extension() {
-    offset_x_min = extension_arm_w() - 2 * extension_groove_depth() -3;
+    offset_x_min = extension_arm_w() / 2;
     hook_overlap = jabra_arm_hook_stretch();
     console_overlap_y = -15; // extension will overlap with console. Must have enough clearance though
     console_overlap_offset_x = jabra510_footplate_diameter() / 3;
 
     y = jabra510_footplate_holder_slide_in_clearance();
     hook_overlap_y = jabra510_footplate_holder_slide_in_clearance() + hook_overlap;
+    hook_offset_x = extension_arm_w() / 2 - extension_groove_depth() / 2;
 
     points = [
         [-console_overlap_offset_x, console_overlap_y],
@@ -147,7 +145,8 @@ module jabra_console_extension() {
                 polygon(points = points);
                 translate([0, -jabra510_footplate_diameter() / 2, 0]) circle(d = jabra510_footplate_diameter());
         }
-        translate([0, y, 0]) jabra_extension_arm_hook();
+        translate([-hook_offset_x, y, 0]) jabra_extension_arm_hook();
+        translate([hook_offset_x, y, 0]) jabra_extension_arm_hook();
     }
 }
 
