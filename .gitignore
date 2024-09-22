@@ -1,4 +1,5 @@
 .idea
+**/.env
 
 # rendered 3D models
 **/*.3mf

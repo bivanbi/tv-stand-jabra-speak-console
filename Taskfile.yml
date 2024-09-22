@@ -1,0 +1,29 @@
+---
+version: '3'
+
+dotenv: ['.env']
+
+vars:
+  dir: '{{.USER_WORKING_DIR}}'
+  default_format: "stl"
+  default_resolution: 100
+
+tasks:
+  default:
+    cmds:
+      - task: render
+
+  render:
+    desc: "Render all SCAD files in the current directory"
+    vars:
+      format: "{{.FORMAT | default .default_format}}"
+      resolution: "{{.RESOLUTION | default .default_resolution}}"
+    cmds:
+      - |
+        set -e
+        echo "Rendering all SCAD files into '{{.format}}' format with a resolution of '{{.resolution}}'"
+        for _FILE in $(ls {{.dir}}/*.scad); do
+          EXPORT_FILENAME="$(basename "$file" .scad).{{.format}}"
+          echo "Rendering '${_FILE}' into '${EXPORT_FILENAME}, resolution: {{.resolution}}'"
+          openscad -o "${EXPORT_FILENAME}" -D '$fn={{.resolution}}' "${_FILE}"
+        done
