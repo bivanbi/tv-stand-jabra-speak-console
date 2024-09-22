@@ -23,7 +23,7 @@ tasks:
         set -e
         echo "Rendering all SCAD files into '{{.format}}' format with a resolution of '{{.resolution}}'"
         for _FILE in $(ls {{.dir}}/*.scad); do
-          EXPORT_FILENAME="$(basename "$file" .scad).{{.format}}"
-          echo "Rendering '${_FILE}' into '${EXPORT_FILENAME}, resolution: {{.resolution}}'"
-          openscad -o "${EXPORT_FILENAME}" -D '$fn={{.resolution}}' "${_FILE}"
+          _EXPORT_FILE="{{.dir}}/$(basename "${_FILE}" .scad).{{.format}}"
+          echo "Rendering '${_FILE}' into '${_EXPORT_FILE}, resolution: {{.resolution}}'"
+          openscad -o "${_EXPORT_FILE}" -D '$fn={{.resolution}}' "${_FILE}"
         done
