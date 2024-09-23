@@ -54,11 +54,11 @@ openscad -o output.stl -D '$fn=100' input.scad
 ##### On commandline:
 Invoke Gotask with environment variables set, e.g.:
 ```bash
-FORMAT=stl RESOLUTION=50 task
+FORMAT=stl RESOLUTION=100 task
 
 # or
 export FORMAT=stl
-export RESOLUTION=50
+export RESOLUTION=100
 task
 ```
 
