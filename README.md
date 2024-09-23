@@ -41,14 +41,6 @@ openscad -o output.stl -D '$fn=100' input.scad
    ```
    
 #### Override format and render resolution
-##### Using .env file
-1. Copy the `.env.example` file to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-2. Edit as needed
-3. Run Gotask like normal
-
 ##### On commandline:
 Invoke Gotask with environment variables set, e.g.:
 ```bash
@@ -59,3 +51,15 @@ export FORMAT=stl
 export RESOLUTION=100
 task
 ```
+
+##### Using .env file
+**Note**: This is a global setting that cannot be overridden on commandline.
+
+2. Copy the `env.example` file to `.env`:
+   ```bash
+   cp env.example .env
+   ```
+2. Edit as needed
+3. Run Gotask like normal
+
+*`.env` file will override environment variables set on commandline.*
