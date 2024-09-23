@@ -36,19 +36,29 @@ openscad -o output.stl -D '$fn=100' input.scad
 1. Open a terminal
 2. Run Gotask with the directory containing the `.scad` files, e.g.:
    ```bash
-   cd console/perlegear_jabra510
+   cd vendors/mikrotik
+   task all
+   # or simply
    task
+   ```
+    
+### Render a single `.scad` file from command line with Gotask
+1. Open a terminal
+2. Run Gotask with the directory containing the `.scad` files, e.g.:
+   ```bash
+   cd vendors/mikrotik
+   task render -- <SCAD filename>
    ```
    
 #### Override format and render resolution
 ##### On commandline:
 Invoke Gotask with environment variables set, e.g.:
 ```bash
-FORMAT=stl RESOLUTION=100 task
+FORMAT=stl RESOLUTION=50 task
 
 # or
 export FORMAT=stl
-export RESOLUTION=100
+export RESOLUTION=50
 task
 ```
 
@@ -61,5 +71,3 @@ task
    ```
 2. Edit as needed
 3. Run Gotask like normal
-
-*`.env` file will override environment variables set on commandline.*
