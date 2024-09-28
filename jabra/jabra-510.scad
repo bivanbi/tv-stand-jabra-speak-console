@@ -13,7 +13,7 @@ function jabra510_footplate_holder_slide_in_clearance() = 20; // To be able to s
 function jabra510_body_ground_clearance() = 11; // the body of the Jabra 510 is is this many millimeters from 'ground'
 
 function jabra510_footplate_holder_tolerance_x() = 0.5; // provide somewhat loose fit
-function jabra510_footplate_holder_tolerance_y() = 0.2; // provide somewhat loose fit
+function jabra510_footplate_holder_tolerance_y() = 0.3; // provide somewhat loose fit, but not too loose. Helps to keep Jabra in place.
 
 footplate_radius = jabra510_footplate_diameter() / 2 + jabra510_footplate_holder_tolerance_x();
 hollow_footplate_outer_skirt_width = 10;
