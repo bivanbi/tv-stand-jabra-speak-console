@@ -1,6 +1,11 @@
 # tv-stand-jabra-speak-console
 Simplistic Jabra Speak 510 console for TV stand
 
+## Recommended Print Settings
+* Filament: PLA+ / PLA Tough / PETG
+* Wall loops: 3 or more
+* Infill density: 100%
+
 ## Dependencies
 ### OpenSCAD (required)
 Required to render the `.scad` files into STL or other model file format.
