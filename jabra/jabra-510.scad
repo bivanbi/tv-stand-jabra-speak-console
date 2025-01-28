@@ -35,8 +35,6 @@ module jabra510_footplate_cutout() {
     
     difference() {
         circle(r = r);
-        square([2 * r, hollow_footplate_spoke_width], center = true);
-        square([hollow_footplate_spoke_width, 2 * r], center = true);
     }
 }
 
