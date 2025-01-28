@@ -5,7 +5,7 @@ function jabra510_footplate_edge_thickness() = 5; // hard to measure precisely b
 function jabra510_groove_diameter() = 71;
 function jabra510_groove_height() = 5;
 
-function jabra510_holder_baseplate_thickness() = 3;
+function jabra510_holder_baseplate_thickness() = 6;
 function jabra510_footplate_holder_thickness() = 2;
 function jabra510_footplate_holder_groove_depth() = 4;
 
